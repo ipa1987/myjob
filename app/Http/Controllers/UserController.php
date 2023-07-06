@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\SeekerRegistrationRequest;
+use App\Http\Requests\RegistrationRequest;
 
 class UserController extends Controller
 {
@@ -22,7 +22,7 @@ class UserController extends Controller
 
     }
 
-    public function storeSeeker(SeekerRegistrationRequest $request) {
+    public function storeSeeker(RegistrationRequest $request) {
 
        User::create([
 
@@ -33,22 +33,25 @@ class UserController extends Controller
 
        ]);
 
-       return back();
+       return redirect()->route('login')->with('successMsg', 'Your account has been created');
 
     }
 
-    public function storeEmployer(SeekerRegistrationRequest $request) {
+    public function storeEmployer(RegistrationRequest $request) {
 
         User::create([
  
          'name' => request('name'),
          'email' => request('email'),
          'password' => bcrypt(request('password')),
-         'user_type' => self::JOB_POSTER
+         'user_type' => self::JOB_POSTER,
+         'user_trial' => now()->addWeek()
+
+         // You can use Carbon to format dates
  
         ]);
  
-        return back();
+        return redirect()->route('login')->with('successMsg', 'Your account has been created');
  
      }
 
