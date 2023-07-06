@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function storeSeeker(RegistrationRequest $request) {
 
-       User::create([
+       $user = User::create([
 
         'name' => request('name'),
         'email' => request('email'),
@@ -33,13 +33,15 @@ class UserController extends Controller
 
        ]);
 
+       $user->sendEmailVerificationNotification();
+
        return redirect()->route('login')->with('successMsg', 'Your account has been created');
 
     }
 
     public function storeEmployer(RegistrationRequest $request) {
 
-        User::create([
+        $user = User::create([
  
          'name' => request('name'),
          'email' => request('email'),
@@ -50,6 +52,8 @@ class UserController extends Controller
          // You can use Carbon to format dates
  
         ]);
+
+        $user->sendEmailVerificationNotification();
  
         return redirect()->route('login')->with('successMsg', 'Your account has been created');
  
