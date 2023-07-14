@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
-    return redirect('/home');
+    return redirect('/login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 // Routes
@@ -47,5 +47,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 // dashboard
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('verified')->name('dashboard');
+
+Route::get('/resend/verification/email', [DashboardController::class, 'resend'])->name('resend.email');
 
 Route::get('/verify', [DashboardController::class, 'verify'])->name('verification.notice');

@@ -33,9 +33,11 @@ class UserController extends Controller
 
        ]);
 
+       Auth::login($user);
+
        $user->sendEmailVerificationNotification();
 
-       return redirect()->route('login')->with('successMsg', 'Your account has been created');
+        // return redirect()->route('verification.notice')->with('successMsg', 'Your account has been created');
 
     }
 
@@ -53,9 +55,13 @@ class UserController extends Controller
  
         ]);
 
+        Auth::login($user);
+
         $user->sendEmailVerificationNotification();
- 
-        return redirect()->route('login')->with('successMsg', 'Your account has been created');
+
+        // return redirect()->route('verification.notice')->with('successMsg', 'Your account has been created');
+
+        
  
      }
 
