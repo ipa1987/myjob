@@ -89,4 +89,4 @@ Route::get('applicants' ,[ApplicantController::class, 'index'])->name('applicant
 Route::get('applicants/{listing:slug}' ,[ApplicantController::class, 'show'])->name('applicants.show');
 Route::post('shortlist/{listingId}/{userId}', [ApplicantController::class, 'shortlist'])
 ->name('applicants.shortlist');
-Route::post('/applicantion/{listingId}/submit', [ApplicantController::class,'apply'])->name('applicantion.submit');
+Route::post('/application/{listingId}/submit', [ApplicantController::class,'apply'])->name('applicantion.submit');
